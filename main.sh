@@ -1,8 +1,5 @@
-m#!/bin/bash
-TELEGRAM_API_URL="https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage"
+#!/bin/bash
 CHANNEL_ID="@modelcollector3d"
-MESSAGE="test message 2"
-echo $BOT_TOKEN
 sendMessage() {
   curl \
     -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
@@ -10,15 +7,8 @@ sendMessage() {
     -d text="$2"
 }
 
-#sendMessage $CHANNEL_ID $MESSAGE
-# curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-#     -d chat_id="${CHAT_ID}" \
-#     -d text="${MESSAGE}"
-
-
-  curl \
-    -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
-    -d chat_id="$CHANNEL_ID" \
-    -d text="$MESSAGE"
-
-    https://api.telegram.org/bot$TOKEN/sendMessage
+# Read the file into a list
+while IFS= read -r line; do
+  sendMessage $CHANNEL_ID $line
+  sleep 5
+done < list.txt
