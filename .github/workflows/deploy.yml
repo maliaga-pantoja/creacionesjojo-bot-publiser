@@ -1,4 +1,4 @@
-name: Daily Code Cleanup
+name: Publish Ads
 on:
   schedule:
     - cron: '0 */12 * * *'  # Every 12 hours
