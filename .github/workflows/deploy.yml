@@ -1,0 +1,16 @@
+name: Daily Code Cleanup
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # Every 12 hours
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: DEV
+    steps:
+      - uses: actions/checkout@v4
+      - name: set permissions
+        run: chmod +x run.sh
+      - name: publish content
+        run: ./run.sh
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
