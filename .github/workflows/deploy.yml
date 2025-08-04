@@ -2,7 +2,7 @@ name: Publish Ads
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # Every 12 hours
+    - cron: '0 */12 * * *'  # Every 12 hours
 jobs:
   publish:
     runs-on: ubuntu-latest

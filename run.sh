@@ -1,4 +1,5 @@
 #!/bin/bash
+
 CHANNEL_ID="@modelcollector3d"
 sendMessage() {
   curl \
@@ -7,8 +8,14 @@ sendMessage() {
     -d text="$2"
 }
 
-# Read the file into a list
-while IFS= read -r line; do
-  sendMessage $CHANNEL_ID $line
-  sleep 5
-done < list.txt
+# # Read the file into a list
+# while IFS= read -r line; do
+#   sendMessage $CHANNEL_ID $line
+#   sleep 5
+# done < list.txt
+FILE_LINES=$(grep -c '' list.txt)
+echo "total lines: $FILE_LINES"
+R=$(shuf -i1-$FILE_LINES -n1)
+echo "random line: $R"
+CONTENT=$(head -n $R list.txt | tail -1)
+sendMessage $CHANNEL_ID $CONTENT
