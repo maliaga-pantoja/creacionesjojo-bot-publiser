@@ -13,7 +13,7 @@ sendMessage() {
 #   sendMessage $CHANNEL_ID $line
 #   sleep 5
 # done < list.txt
-FILE_LINES=$(grep -c '' list.txt)
+FILE_LINES=$(grep -c '' $AD_FILE)
 echo "total lines: $FILE_LINES"
 R=$(shuf -i1-$FILE_LINES -n1)
 echo "random line: $R"

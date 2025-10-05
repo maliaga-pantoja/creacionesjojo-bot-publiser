@@ -1,4 +1,4 @@
-name: Publish Ads
+name: Publish Ads DEV
 on:
   workflow_dispatch:
   schedule:
@@ -15,5 +15,5 @@ jobs:
         run: make ad
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          CHANNEL_ID: "@stlcollectordev"
+          CHANNEL_ID: ${{ vars.CHANNEL_ID }}
           AD_FILE: ./scripts/list.txt
