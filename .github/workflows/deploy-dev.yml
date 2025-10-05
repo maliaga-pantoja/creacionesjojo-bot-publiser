@@ -1,6 +1,6 @@
 name: Publish Ads DEV
 on:
-  workflow_dispatch:
+  push
 jobs:
   publish:
     runs-on: ubuntu-latest
