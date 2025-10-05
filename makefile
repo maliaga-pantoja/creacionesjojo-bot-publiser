@@ -9,3 +9,5 @@ run:
 		-v ${PWD}/src:/app -w /app \
 		-v ${PWD}/files:/files \
 	${IMAGE} python -u /app/main.py
+ad:
+	./scripts/run.sh
