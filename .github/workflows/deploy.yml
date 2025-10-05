@@ -10,8 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: set permissions
-        run: chmod +x run.sh
+        run: chmod +x ./scripts/run.sh
       - name: publish content
-        run: ./run.sh
+        run: make ad
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHANNEL_ID: "@stlcollectordev"
+          AD_FILE: ./scripts/list.txt

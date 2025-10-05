@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CHANNEL_ID="@modelcollector3d"
+
 sendMessage() {
   curl \
     -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
@@ -17,5 +17,5 @@ FILE_LINES=$(grep -c '' list.txt)
 echo "total lines: $FILE_LINES"
 R=$(shuf -i1-$FILE_LINES -n1)
 echo "random line: $R"
-CONTENT=$(head -n $R list.txt | tail -1)
+CONTENT=$(head -n $R $AD_FILE | tail -1)
 sendMessage $CHANNEL_ID $CONTENT
