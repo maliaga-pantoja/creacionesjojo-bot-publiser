@@ -45,40 +45,63 @@ async def getFiles (folder_name: str) -> dict :
 
 async def main():
   try:
-    log_upload("starting app")
+    print("starting app")
     if len(os.listdir(UPLOAD_FOLDER)) == 0:
-      log_upload("folder is empty. Nothing to do")
+      print("folder is empty. Nothing to do")
     else:
       folder_name = await getFirstFolder()
       files = await getFiles(folder_name)
       async with client.action(GROUP_USERNAME, 'document') as action:
         # sending stl
-        log_upload(f"trying to upload file: {files['stl']}")
-        await client.send_file(
-          GROUP_USERNAME, 
-          files['stl'],
-          caption = "https://t.me/modelcollector3d",
-          progress_callback=action.progress
-        )
-        # sending images
- 
+        print(f"trying to upload file: {files['stl']}")
         await image_analizer(files['images'])
-
+        album0 = []
+        album1 = []
+        uploaded_file0 = await client.upload_file(files['images'][0])
+        spoiler_media0 = types.InputMediaUploadedPhoto(
+            uploaded_file0,
+            spoiler=True
+        )
+        album0.append(spoiler_media0)
+        uploaded_file1 = await client.upload_file(files['images'][1])
+        spoiler_media1 = types.InputMediaUploadedPhoto(
+            uploaded_file1,
+            spoiler=False
+        )
+        album1.append(spoiler_media1)
         await client.send_file(
-          GROUP_USERNAME, 
-          files['images'],
-          caption = f"{folder_name}",
-          progress_callback=action.progress
+            GROUP_USERNAME,
+            album0
         )
-        # sending images
+        await client.send_file(
+            GROUP_USERNAME,
+            album1
+        )
+        # await client.send_file(
+        #   GROUP_USERNAME, 
+        #   files['stl'],
+        #   caption = "https://t.me/modelcollector3d",
+        #   progress_callback=action.progress
+        # )
+        # # sending images
+ 
+        
 
-        log_upload(f"subido exitosamente {files['stl']}")
-        shutil.move(
-          os.path.join(UPLOAD_FOLDER, folder_name ),
-          os.path.join(TARGET_FOLDER, folder_name )
-        )
+        # await client.send_file(
+        #   GROUP_USERNAME, 
+        #   files['images'],
+        #   caption = f"{folder_name}",
+        #   progress_callback=action.progress
+        # )
+        # # sending images
+
+        # log_upload(f"subido exitosamente {files['stl']}")
+        # shutil.move(
+        #   os.path.join(UPLOAD_FOLDER, folder_name ),
+        #   os.path.join(TARGET_FOLDER, folder_name )
+        # )
   except Exception as e:
-    log_upload(f"Error found: {e}")
+    print(f"Error found: {e}")
 
 try:
   with client:
@@ -86,6 +109,6 @@ try:
       client.loop.run_until_complete(main())
       time.sleep(3600)
 except Exception as e:
-  log_upload(f"Error: {e}")
+  print(f"Error: {e}")
 
 

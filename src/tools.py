@@ -5,7 +5,7 @@ from telethon import functions, types
 
 from typing import List
 
-
+import math
 import io
 
 def nude_classifier(image_path: str) -> bool :
@@ -42,10 +42,10 @@ def image_optimize(image_path: str):
       # Convert bytes to megabytes (1 MB = 1024 * 1024 bytes)
       size_in_mb = buffer_size / (1024 * 1024)
       if size_in_mb >= 8 :
-        log_upload("imagen demasiado grande, redimensionando..")
+        print("imagen demasiado grande, redimensionando..")
         width, height = img.size
         img.resize(( math.ceil(width * 0.5), math.ceil(height*0.5)), Image.Resampling.BOX ).save(image_path)
-        log_upload(f"imagen redimensionanda a: {width}px x {height}px")
+        print(f"imagen redimensionanda a: {width}px x {height}px")
   except Exception as e:
       print(f"Error: {e}")
       return None
